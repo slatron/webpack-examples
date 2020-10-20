@@ -1,8 +1,8 @@
-const getModule = () => import("./common/usersAPI");
-import "./styles/style.css"
-import "./styles/style.scss"
+const getModule = () => import("../common/usersAPI");
+import "/dev/styles/style.css"
+import "/dev/styles/style.scss"
 
-const URL = "https://jsonplaceholder.typicode.com/users"
+const URL = "https://jsonplaceholder.typicode.com/photos"
 
 const btn = document.getElementById("btn");
 

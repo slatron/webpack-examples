@@ -1,9 +1,9 @@
 # MPA setup with single bundle
-- demonstrates multiple html pages with shared bundle
-- each page shares API method
-  - called with different endpoint from html button data-load
+- demonstrates multiple html pages with bundle for each page
+- each page calls same method in different js file
+- different endpoints are in the js files
 
-# prerequisites
+# Prerequisites
 - node v10 (tested on v10.22.1)
 
 # Setup

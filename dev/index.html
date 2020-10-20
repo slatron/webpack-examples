@@ -6,12 +6,8 @@
 </head>
 <body>
   <h1><a href="/">Hello, Webpack!</a></h1>
-  <nav>
-    <ul>
-      <li><a href="/photos.html">photo page</a></li>
-      <li><a href="/todos.html">todo page</a></li>
-    </ul>
-  </nav>
-  <button id="btn" data-load="users">Load Users in console</button>
+  <%= htmlWebpackPlugin.options.nav %>
+  <button id="btn">Load Users in console</button>
+  <%= htmlWebpackPlugin.options.msg %>
 </body>
 </html>
