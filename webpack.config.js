@@ -5,7 +5,7 @@ const path = require("path")
 // - should be in separate module post-POC
 const msg = `
 <p>
-  This is the MPA model that would be just like the current gulp anavo-client build. Each page of the application calls the same javascript bundle.
+  This MPA model is closest the current gulp build. Each page of the application calls the same javascript bundle.
 </p>
 
 <p>
@@ -30,6 +30,8 @@ const generateHtmlPlugin = (title) => {
     title,
     filename: `${title.toLowerCase()}.html`,
     template: `./dev/pages/${title.toLowerCase()}.html`,
+    nav,
+    msg
   });
 }
 
@@ -49,7 +51,9 @@ const pages = populateHtmlPlugins([
 const indexPage = [
   new HtmlWebpackPlugin({
     title: 'Home',
-    template: path.resolve(__dirname, "dev", "index.html")
+    template: path.resolve(__dirname, "dev", "index.html"),
+    nav,
+    msg
   })
 ]
 
