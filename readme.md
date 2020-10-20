@@ -15,7 +15,7 @@ Click on the load button on each page to call an api
 
 API response Results are displayed in console
 
-### POC Takeaways
+# POC Takeaways
 
 <p>
   This MPA model is closest the current gulp build. Each page of the application calls the same javascript bundle.
