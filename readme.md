@@ -3,6 +3,9 @@
 - each page shares API method
   - called with different endpoint from html button data-load
 
+# prerequisites
+- node v10 (tested on v10.22.1)
+
 # Setup
 - `$ npm install`
 - `$ npm run start`
