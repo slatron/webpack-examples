@@ -9,4 +9,5 @@
 - Open `http://localhost:8080/` in a browser
 
 Click on the load button on each page to call an api
+
 Results are displayed in console
