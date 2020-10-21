@@ -8,7 +8,7 @@ POC models for webpack apps
 
 ### Angular and React MPA models
 
-* link when ready - Angular MPA
+* [Angular MPA](https://github.com/slatron/webpack-examples/tree/mpa-angular)
 * link when ready - React MPA
 
 ### Agnostic webpack build alongside current gulp build
