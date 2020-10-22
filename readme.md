@@ -14,11 +14,15 @@ POC models for webpack apps
 ### Agnostic webpack build alongside current gulp build
 
 * link when ready - MPA agnostic gulp + webpack
+
 ~~* link when ready - SPA agnostic gulp + webpack~~
 
 ### Webpack build alongside current gulp build in each framework
 
 * link when ready - MPA agnostic gulp + webpack on React
+
 ~~* link when ready - MPA agnostic gulp + webpack on Angular~~
+
 ~~* link when ready - SPA agnostic gulp + webpack on React~~
+
 ~~* link when ready - SPA agnostic gulp + webpack on Angular~~
