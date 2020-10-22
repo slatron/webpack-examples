@@ -25,4 +25,4 @@ POC models for webpack apps
 
 ~~SPA agnostic gulp + webpack on React~~
 
-~~*PA agnostic gulp + webpack on Angular~~
+~~SPA agnostic gulp + webpack on Angular~~
