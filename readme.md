@@ -1,7 +1,5 @@
 # MPA Angular Example
-
-TODO:
-- (attempt to) demonstrate multiple html pages with shared Angular bundle
+- Demonstrates multiple html pages model for an Angular application
 
 # Prerequisites
 - node v10 (tested on v10.22.1)
@@ -9,7 +7,7 @@ TODO:
 # Setup
 *Note* the application pages do not load in the browser. The last npm run build creates two Angular applications at `/dist/mpa-project/` and `/dist/mpa-project-two/`. To see in a local server, I have to see what's preventing the usual webpack webserver from serving up files form those Angular `/dist` folders.
 
-I don't recommend going through this process unless you want to see a starting point towards building multiple side-by-side Angular applications as SPAs within an MPA.
+I don't recommend going through this process unless you want to see a starting point towards building multiple side-by-side Angular applications as SPAs within an MPA. It's also missing the /app folder from each `/mpa-project-*` folder from the .gitignore.
 
 After cloning the repo, from the root...
 - `$ cd mpa-project`
