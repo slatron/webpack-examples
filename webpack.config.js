@@ -1,60 +1,93 @@
-const HtmlWebpackPlugin = require("html-webpack-plugin")
-const path = require("path")
+const path = require('path')
+const getFilesFromDir = require('./config/files')
+const PAGE_DIR = path.join('dev', 'pages', path.sep)
 
-const generateHtmlPlugin = (title) => {
-  return new HtmlWebpackPlugin({
-    title,
-    filename: `${title.toLowerCase()}.html`,
-    template: `./dev/pages/${title.toLowerCase()}.html`,
-  });
-}
+const jsFiles = getFilesFromDir(PAGE_DIR, ['.js'])
+const entry = jsFiles.reduce((obj, filePath) => {
+  const entryChunkName = filePath.replace(path.extname(filePath), '').replace(PAGE_DIR, '')
+  obj[entryChunkName] = `./${filePath}`
+  return obj
+}, {})
 
-const populateHtmlPlugins = (pagesArray) => {
-  res = [];
-  pagesArray.forEach(page => {
-    res.push(generateHtmlPlugin(page));
+const HTMLWebPackPlugin = require("html-webpack-plugin")
+const htmlFiles = getFilesFromDir(PAGE_DIR, ['.html'])
+
+const htmlPlugins = htmlFiles.map(filePath => {
+  const fileName = filePath.replace(PAGE_DIR, '')
+  return new HTMLWebPackPlugin({
+    chunks: [fileName.replace(path.extname(fileName), ''), 'vendor'],
+    // chunks: ['main', 'vendor'],
+    template: filePath,
+    filename: fileName
   })
-  return res;
-}
+})
 
-const pages = populateHtmlPlugins([
-  "Photos",
-  "Todos"
-]);
+module.exports = (env, argv) => {
+  // This will be replaces by the actual tag version from the commoand line
+  // - TODO: How to read passed string through gulp
+  const tag = argv.tag || '0.0.0'
 
-const indexPage = [
-  new HtmlWebpackPlugin({
-    title: 'Home',
-    template: path.resolve(__dirname, "dev", "index.html")
-  })
-]
+  return {
 
-module.exports = {
-  entry: {
-    main: './dev/index.js',
-  },
-  output: {
-    path: path.resolve(__dirname, "app"),
-    filename: '[name].js'
-  },
-  module: {
-    rules: [
-      {
-        test: /\.css$/,
-        use: ["style-loader", "css-loader"]
-      },
-      {
-        test: /\.scss$/,
-        use: ["style-loader", "css-loader", "sass-loader"]
-      },
-      {
-        test: /\.js$/,
-        use: ["babel-loader"]
+    // Create js bundle for each page:
+    entry,
+
+    // Uncomment this to bundle all js into one main.tag.js file
+    // - This would be a large single download like the current application
+    // - as opposed to one js file per page
+    // entry: {
+    //   main: './dev/pages/index.js'
+    // },
+
+    // generates js files for pages
+    output: {
+      path: path.resolve(__dirname, "app"),
+      filename: `[name].${tag}.js`
+    },
+
+    // Put each html page in its own file
+    plugins:[...htmlPlugins],
+
+    // Create alias for reslving pathname imports
+    resolve: {
+      alias: {
+        dev: path.resolve(__dirname, 'dev'),
+        components: path.resolve(__dirname, 'dev', 'components')
       }
-    ]
-  },
-  // optimization: {
-  //   splitChunks: { chunks: "all" }
-  // },
-  plugins: [...pages, ...indexPage]
+    },
+
+    // Precompile JS into ES5 for browser compatability
+    module: {
+      rules: [
+        {
+          test: /\.js$/,
+          exclude: /node_modules/,
+          use: {
+            loader: 'babel-loader',
+            options: {
+              presets: [
+                '@babel/preset-env',
+                '@babel/preset-react'
+              ]
+            }
+          }
+        }
+      ]
+    },
+
+    // Split unchanging vendor files into seprate bundle
+    optimization: {
+      minimize: argv.mode === 'production' ? true : false,
+       splitChunks: {
+          cacheGroups: {
+             vendor: {
+                test: /node_modules/,
+                chunks: 'initial',
+                name: 'vendor',
+                enforce: true
+             }
+          }
+       }
+    }
+  } // End webpack.config object returned
 }
