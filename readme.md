@@ -9,16 +9,23 @@ POC models for webpack apps
 ### Angular and React MPA models
 
 * [Angular MPA](https://github.com/slatron/webpack-examples/tree/mpa-angular)
-* React MPA - in progress...
+* [React MPA](https://github.com/slatron/webpack-examples/tree/mpa-react)
 
-### Agnostic webpack build alongside current gulp build
+###
 
-* link when ready - MPA agnostic gulp + webpack
+* React MPA with styles, fonts and images - In Progress...
+* React MPA alongside AngularJS gulp - Coming soon...
+
+## POCs ruled out by MPA + Reeact decision
+
+### ~~Agnostic webpack build alongside current gulp build~~
+
+* ~~MPA agnostic gulp + webpack~~
 * ~~SPA agnostic gulp + webpack~~
 
-### Webpack build alongside current gulp build in each framework
+### ~~Webpack build alongside current gulp build in each framework~~
 
-* link when ready - MPA agnostic gulp + webpack on React
+* ~~MPA agnostic gulp + webpack on React~~
 * ~~MPA agnostic gulp + webpack on Angular~~
 * ~~SPA agnostic gulp + webpack on React~~
 * ~~SPA agnostic gulp + webpack on Angular~~
