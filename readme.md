@@ -1,10 +1,5 @@
 # React MPA sample application
-- demonstrates multiple html pages in a React application
-- each page shares common navigation React component
-- Each page has its own js file to keep bundle size limited
-- Can be changed in webpack.config.js to combine page bundles into larger modules
-  - we could set up admin, charts, records bundles to optimize when needed
-- Much easier to to configure than with Angular
+- Demonstrates multiple html pages in a React application with Styles and asset handling
 
 # Prerequisites
 - node v10 (tested on v10.22.1)
@@ -14,11 +9,7 @@
 - `$ npm run start`
 - Open `http://localhost:8080/` in a browser
 
-The unstyled navigation links come from a common Menu conponent. This is very basic, but demonstrates how we can build a multi-page-application from React.
-
 # POC Takeaways
-With React, I was able to accomplish in an hour what I'm still having trouble building in Angular. Its clear that if we want to keep the migration focused on a straightforward path, we should stick to MPA URLs. And if this is the case, we should migrate to React instaed of Angular.
+Looks like we'll have more control over the styles in the migration project. Any page can import the main styles to apply it to that tree. These use the same base styles as the main application.
 
-I can already use webpack to customize how we want our app to build. This is critical to support a smooth page-by-page migration. I'll be moving forward with MPA + React on the next two POCs. First, to set up a more robust webpack + React application that includes a model for styles, fonts and images in addition to HTML and js.
-
-After that, the last POC needed (fingers-crossed) is a full build with an AngularJS application built in gulp alongside the new application replacing pages as they are ready with webpack.
+In the last POC where gulp will be living alongside the migration files, we can add a unique `main.scss` file to pull in the same base files to avoid having duplicate entries for the base scss files.
