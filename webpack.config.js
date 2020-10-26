@@ -16,6 +16,8 @@ const htmlPlugins = htmlFiles.map(filePath => {
   const fileName = filePath.replace(PAGE_DIR, '')
   return new HTMLWebPackPlugin({
     chunks: [fileName.replace(path.extname(fileName), ''), 'vendor'],
+    // Uncomment this to bundle all js into one main.tag.js file
+    // - connects each html page to one main.js file
     // chunks: ['main', 'vendor'],
     template: filePath,
     filename: fileName
@@ -49,16 +51,28 @@ module.exports = (env, argv) => {
     plugins:[...htmlPlugins],
 
     // Create alias for reslving pathname imports
+    // - this allows for non-relative imports
+    // - import 'components/foo' instead of import '../../../components/foo'
     resolve: {
       alias: {
         dev: path.resolve(__dirname, 'dev'),
-        components: path.resolve(__dirname, 'dev', 'components')
+        components: path.resolve(__dirname, 'dev', 'components'),
+        styles: path.resolve(__dirname, 'dev', 'styles'),
+        pages: path.resolve(__dirname, 'dev', 'pages')
       }
     },
 
     // Precompile JS into ES5 for browser compatability
     module: {
       rules: [
+        {
+          test: /\.css$/, // none yet, but this allows use of plain css files
+          use: ["style-loader", "css-loader"]
+        },
+        {
+          test: /\.scss$/,
+          use: ["style-loader", "css-loader", "sass-loader"]
+        },
         {
           test: /\.js$/,
           exclude: /node_modules/,
