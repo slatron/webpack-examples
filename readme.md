@@ -24,7 +24,13 @@ After cloning the repo, from the root...
 
  Angular purpose is to buils single page applications. There really isn't any simple way to support traditional multiple page applications like ours. To get around this, I used their cli tool to build two separate Angular applications within the same project. The main index.html page would link to each other page in the application.
 
-This already presents basic issues to solve with Angular. First, the URL structure would have to be further configured to not use a folder per page. This will require moving the js build for each page to a separate folder, which will involve customizing the Angular build. Second, each basic bundle here is already huge at >500MB. We'd have to spend some time figuring out a way to decouple common dependeincies beyond shared components. Even the gulp-webpack build trigger will have to be customized to build different page apps. Third, even when getting this built with multiple SPAs per page and no js router, my local Angular pages were redirecting back to the `index.htm` page.
+This already presents basic issues to solve with Angular. First, the URL structure would have to be further configured to not use a folder per page. This will require moving the js build for each page to a separate folder, which will involve customizing the Angular build.
+
+Second, each basic bundle here is already huge at >500MB. We'd have to spend some time figuring out a way to decouple common dependeincies beyond shared components. Even the gulp-webpack build trigger will have to be customized to build different page apps.
+
+Third, even when getting this built with multiple SPAs per page and no js router, my local Angular pages were redirecting back to the `index.htm` page. I'm sure this can be resolved outside of timeboxing this prototype, but it shows that we can easily run into routing couflicts in Angular2 without even using a JS router.
+
+Fourth, building a full application per page seems difficult to maintain an build for. Not to mention the time this would take to build. These are all issues that we can solve, however we'd still be customizing the Angular framework. We would likely have to re-work the webpack build with each Angular update.
 
 Angular is also updated very regularly with a new major version every six months. This keeps the framework very up -to-date and stable, but only if you are using it in way set up through their CLI tool. By going pretty far outside the perscribed architecture, we'll have a tougher time keeping our customizations up-to-date. [I've read issue threads like this](https://github.com/angular/angular/issues/14745#issuecomment-356936378) where migrations from AngularJS to Angular had to use customized builds that were broken in minor version updates.
 
