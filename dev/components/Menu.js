@@ -1,12 +1,12 @@
-import React, { Component } from 'react'
+import React, { useState } from 'react'
 
-export default class Menu extends Component {
-  render() {
-    return (
-      <ul>
-        <li><a href="/index.html">Home</a></li>
-        <li><a href="/contact.html">Contact</a></li>
-      </ul>
-    )
-  }
+const Menu = (props) => {
+  return (
+    <ul>
+      <li><a href="/index.html">Home</a></li>
+      <li><a href="/contact.html">Contact</a></li>
+    </ul>
+  )
 }
+
+export default Menu
