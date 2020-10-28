@@ -30,7 +30,7 @@ module.exports = (env, argv) => {
   const tag = argv.tag || '0.0.0'
 
   return {
-
+    devtool: 'source-map',
     // Create js bundle for each page:
     entry,
 
@@ -48,7 +48,10 @@ module.exports = (env, argv) => {
     },
 
     // Put each html page in its own file
-    plugins:[...htmlPlugins],
+    plugins:[
+      ...htmlPlugins,
+      require('autoprefixer')
+    ],
 
     // Create alias for reslving pathname imports
     // - this allows for non-relative imports
@@ -66,12 +69,45 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.css$/, // none yet, but this allows use of plain css files
-          use: ["style-loader", "css-loader"]
+          test: /\.(ttf|eot|woff|woff2|svg)$/,
+          use: {
+              loader: 'file-loader',
+              options: {
+                  name: '[name].[ext]',
+                  outputPath: 'fonts/',
+                  esModule: false
+              },
+          },
         },
+        // {
+        //   test: /\.css$/, // none yet, but this would allow use of plain css files
+        //   use: ["style-loader", "css-loader", "postcss-loader"]
+        // },
         {
           test: /\.scss$/,
-          use: ["style-loader", "css-loader", "sass-loader"]
+          use: [
+            {
+              loader: "style-loader"
+            },
+            {
+              loader: "css-loader"
+            },
+            {
+              loader:  "postcss-loader",
+              options: {
+                sourceMap: true
+              },
+            },
+            {
+              loader: "resolve-url-loader"
+            },
+            {
+              loader: "sass-loader",
+              options: {
+                  sourceMap: true
+              }
+            }
+          ]
         },
         {
           test: /\.js$/,
