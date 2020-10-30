@@ -1,10 +1,13 @@
+// TODO: Use `` ES6 for this instead of ES5 string concatenations
+// - Leaving for gulp + webpack POC setup
+
 module.exports = {
   HTML_HEAD: '<head>\n' +
     '    <meta charset="utf-8" />\n' +
     '    <meta http-equiv="X-UA-Compatible" content="IE=edge, chrome=1"/>\n' +
     '    <title>Wellspring by Wellspring Worldwide</title>\n' +
     '    <meta name="viewport" content="width=device-width, initial-scale=1" />\n' +
-    // TBD: will likely remain part of gulp build. Restore in gulp + webpack prototype 
+    // TBD: will likely remain part of gulp build. Restore in gulp + webpack prototype
     // '    <script src="assets/js/analytics.js"></script>\n' +
     '    <link rel="apple-touch-icon" ng-href="assets/images/icon-120x120.png" />\n' +
     '    <link rel="apple-touch-icon" sizes="76x76" ng-href="assets/images/icon-76x76.png" />\n' +
