@@ -2,10 +2,10 @@ const fs   = require('fs')
 const path = require('path')
 
 function getFilesFromDir(dir, fileTypes) {
-  console.log(' ****')
+  console.log(' \n\n****')
   console.log(' ** Gathering fileTypes: ', fileTypes)
   console.log(' ** From dir: ', dir)
-  console.log(' ****\n\n')
+  console.log(' ****')
   const filesToReturn = []
 
   function walkDir(currentPath) {
@@ -22,7 +22,6 @@ function getFilesFromDir(dir, fileTypes) {
 
   walkDir(dir);
   return filesToReturn;
-
 }
 
 module.exports = getFilesFromDir

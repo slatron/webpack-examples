@@ -1,32 +1,21 @@
 const path = require('path')
+const HTMLWebPackPlugin = require('html-webpack-plugin')
+
+const generateSetting = require('./config/generateSetting')
 const getFilesFromDir = require('./config/files')
 const PAGE_DIR = path.join('dev', 'pages', path.sep)
 
+// Generate entry setting for javscript files in PAGE_DIR
 const jsFiles = getFilesFromDir(PAGE_DIR, ['.js'])
-const entry = jsFiles.reduce((obj, filePath) => {
-  const entryChunkName = filePath.replace(path.extname(filePath), '').replace(PAGE_DIR, '')
-  obj[entryChunkName] = `./${filePath}`
-  return obj
-}, {})
+const entry = generateSetting.entry(jsFiles)
 
-const HTMLWebPackPlugin = require("html-webpack-plugin")
+// Generate entry setting for html files in PAGE_DIR
 const htmlFiles = getFilesFromDir(PAGE_DIR, ['.html'])
-
-const htmlPlugins = htmlFiles.map(filePath => {
-  const fileName = filePath.replace(PAGE_DIR, '')
-  return new HTMLWebPackPlugin({
-    chunks: [fileName.replace(path.extname(fileName), ''), 'vendor'],
-    // Uncomment this to bundle all js into one main.tag.js file
-    // - connects each html page to one main.js file
-    // chunks: ['main', 'vendor'],
-    template: filePath,
-    filename: fileName
-  })
-})
+const htmlPlugins = generateSetting.htmlPlugins(htmlFiles)
 
 module.exports = (env, argv) => {
-  // This will be replaces by the actual tag version from the commoand line
-  // - TODO: How to read passed string through gulp
+  // This will be replaced by the actual tag version from the command line
+  // - TODO: How to read tag string here from command line
   const tag = argv.tag || '0.0.0'
 
   return {
@@ -34,9 +23,10 @@ module.exports = (env, argv) => {
     // Create js bundle for each page:
     entry,
 
-    // Uncomment this to bundle all js into one main.tag.js file
+    // Replace entry with this to bundle all js into one main.tag.js file
     // - This would be a large single download like the current application
     // - as opposed to one js file per page
+    // - See comment in /config/gerenateSettngs.js for additional change
     // entry: {
     //   main: './dev/pages/index.js'
     // },
@@ -69,18 +59,31 @@ module.exports = (env, argv) => {
     module: {
       rules: [
         {
-          test: /\.(ttf|eot|woff|woff2|svg)$/,
+          test: /\.(gif|png|svg|jpg)$/,
+          exclude: path.resolve(__dirname, './dev/fonts'),
           use: {
-              loader: 'file-loader',
-              options: {
-                  name: '[name].[ext]',
-                  outputPath: 'fonts/',
-                  esModule: false
-              },
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'assets/images/'
+            }
+          }
+        },
+        {
+          test: /\.(ttf|eot|woff|woff2|svg)$/,
+          include: path.resolve(__dirname, './dev/fonts'),
+          use: {
+            loader: 'file-loader',
+            options: {
+              name: '[name].[ext]',
+              outputPath: 'fonts/',
+              esModule: false
+            },
           },
         },
+        // Uncomment to support plain css files
         // {
-        //   test: /\.css$/, // none yet, but this would allow use of plain css files
+        //   test: /\.css$/,
         //   use: ["style-loader", "css-loader", "postcss-loader"]
         // },
         {
@@ -96,7 +99,7 @@ module.exports = (env, argv) => {
               loader:  "postcss-loader",
               options: {
                 sourceMap: true
-              },
+              }
             },
             {
               loader: "resolve-url-loader"
@@ -125,19 +128,21 @@ module.exports = (env, argv) => {
       ]
     },
 
-    // Split unchanging vendor files into seprate bundle
+    // Split vendor files into seprate bundle
+    // - These files do not change often and should be cached separately
+    // - Affects "dependencies" packages in package.js
     optimization: {
       minimize: argv.mode === 'production' ? true : false,
-       splitChunks: {
-          cacheGroups: {
-             vendor: {
-                test: /node_modules/,
-                chunks: 'initial',
-                name: 'vendor',
-                enforce: true
-             }
+      splitChunks: {
+        cacheGroups: {
+          vendor: {
+            test: /node_modules/,
+            chunks: 'initial',
+            name: 'vendor',
+            enforce: true
           }
-       }
+        }
+      }
     }
   } // End webpack.config object returned
 }
