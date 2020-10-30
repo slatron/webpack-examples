@@ -25,7 +25,7 @@ This directory structure builds off the existing structure. We need to share cer
 
 - Directories & files with a * after the name are new for the migration
 - Other directories listed already exist and contain shared resources from existing app
-- Existing directories not used in this build not in pictured structure
+- Existing directories not used in this build excluded
   - (ex.. `/dev/js/`, `/dev/templates/`)
 
 ```
@@ -65,6 +65,8 @@ Most of this effort covered shared asset resources. To keep the new pages lookin
 This is where each new page in the migration will go. In this setup, I have each page coupled with its own javascript file. We're using the `html-webpack-plugin` package to export each html page in `/dev/pages/` to it's own page, making this a milti-page application.
 
 Like our current application, these are entry points for the application on each page. They will each load a Component in the `/dev/components/page_roots/` directory. This will  call the authentication module and load initail data while starting the UI component tree.
+
+A common \<head\> string for every page is included in the `/config/` directory and added to each page during the build.
 
 ## Javascript
 
