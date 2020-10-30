@@ -26,7 +26,7 @@ This directory structure builds off the existing structure. We need to share cer
 - Directories & files with a * after the name are new for the migration
 - Other directories listed already exist and contain shared resources from existing app
 - Existing directories not used in this build not in pictured structure
-  - (ex.. /dev/js/, /dev/templates/)
+  - (ex.. `/dev/js/`, `/dev/templates/`)
 
 ```
 ├── config*/
