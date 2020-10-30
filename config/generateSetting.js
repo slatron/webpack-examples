@@ -1,6 +1,9 @@
 const path = require('path')
 const PAGE_DIR = path.join('dev', 'pages', path.sep)
 const HTMLWebPackPlugin = require('html-webpack-plugin')
+const htmlStrings = require('./htmlStrings')
+
+const headString = htmlStrings.HTML_HEAD
 
 module.exports = {
 
@@ -18,7 +21,8 @@ module.exports = {
       // - connects each html page to one main.js file
       // chunks: ['main', 'vendor'],
       template: filePath,
-      filename: fileName
+      filename: fileName,
+      headString
     })
   })
 }
