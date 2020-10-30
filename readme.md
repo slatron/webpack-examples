@@ -1,6 +1,6 @@
 # React MPA sample application
 
-Running this app generates a simple 2 page MPA with a shared <Menu> React component.
+Running this app generates a simple 2 page MPA with a shared \<Menu\> React component.
 
 - Demonstrates multiple html pages in a webpack React application
   - Feature and directory/file structre here intended to be used alongside exisiting build
