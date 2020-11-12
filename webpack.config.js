@@ -1,8 +1,8 @@
 const path = require('path')
 const HTMLWebPackPlugin = require('html-webpack-plugin')
 
-const generateSetting = require('./config/generateSetting')
-const getFilesFromDir = require('./config/files')
+const generateSetting = require('./webpack_config/generateSetting')
+const getFilesFromDir = require('./webpack_config/files')
 const PAGE_DIR = path.join('dev', 'pages', path.sep)
 
 // Generate entry setting for javscript files in PAGE_DIR
@@ -26,7 +26,7 @@ module.exports = (env, argv) => {
     // Replace entry with this to bundle all js into one main.tag.js file
     // - This would be a large single download like the current application
     // - as opposed to one js file per page
-    // - See comment in /config/gerenateSettngs.js for additional change
+    // - See comment in /webpack_config/gerenateSettngs.js for additional change
     // entry: {
     //   main: './dev/pages/index.js'
     // },
