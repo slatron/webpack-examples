@@ -1,2 +1,2 @@
 // jscs:disable
-angular.module('Example', []);
+angular.module('Example', ['gettext']);
