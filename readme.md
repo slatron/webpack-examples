@@ -14,7 +14,7 @@ POC models for webpack apps
 ### React + MPA Progressive Models
 
 * [React MPA with styles, fonts and images](https://github.com/slatron/webpack-examples/tree/react-mpa-with-assets)
-* React MPA alongside AngularJS gulp - Coming soon...
+* [React MPA alongside AngularJS gulp](https://github.com/slatron/webpack-examples/tree/react-mpa-with-gulp)
 
 ## POCs ruled out by MPA + React decision
 
