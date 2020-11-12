@@ -1,23 +1,3 @@
-/**
- *  This factory provides a common way for
- *    directives to store application data
- *    between page calls.
- *
- *  The factory defaults to using the browser's
- *    localStorage. In case the user's browser does
- *    not support localStorage, a pageCache object
- *    is used as a backup. Note that this will not
- *    work in-between pageviews. Have a backup plan
- *    for any features using the cache in-between
- *    page views.
- *
- *  Note that localStorage can only handle strings. The
- *    setter function here will convert non-strings
- *    to stringified objects or arrays. If the calling
- *    getter expects non-strings, be sure to convert
- *    the string into JSON via angular.fromJson(). See
- *    entityFieldsCacheFactory for an example.
- */
 angular.module('Example').
 factory('cacheFactory', function() {
 

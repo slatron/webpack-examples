@@ -4,8 +4,8 @@ var gulp    = require('gulp'),
 
 function processTranslations(cb) {
   return gulp.src([paths.SOURCE_TRANSLATIONS, paths.EXCLUDE_NEW_TRANSLATIONS])
-		.pipe(gettext.compile({module: 'Example'}))
-		.pipe(gulp.dest(paths.DEST_TRANSLATION_MODULES), cb);
+ 		.pipe(gettext.compile({module: 'Example'}))
+ 		.pipe(gulp.dest(paths.DEST_TRANSLATION_MODULES), cb);
 }
 
 exports.processTranslations = processTranslations;

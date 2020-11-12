@@ -7,7 +7,7 @@ var gulp        = require('gulp'),
     prod        = tag.length ? true : false;
 
 function html(cb) {
-  return gulp.src(paths.DEV_HTML)
+  return gulp.src([paths.DEV_HTML, paths.DEV_EXCLUDE_MIGRATION_PAGES])
     .pipe(prod ? htmlreplace({
       js: 'assets/js/' + paths.OUT_JS_FILENAME + '.' + tag + '.js',
       head: headString

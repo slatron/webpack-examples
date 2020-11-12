@@ -1,30 +1,12 @@
 <!doctype html>
-<html ng-app="Anavo" ng-strict-di>
+<html ng-app="Example" ng-strict-di>
   <!-- build:head -->
   <!-- endbuild -->
-  <body page-manager catch-delete>
-    <div
-      ng-hide="pageStateVM.userInfo.userAuthorized"
-      ng-include="'templates/layout/authentication-load.html'"
-    ></div>
-    <div ng-show="pageStateVM.userInfo.userAuthorized">
-      <div ng-include="'templates/layout/header.html'"></div>
-      <div
-        ng-hide="pageStateVM.ready.template"
-        ng-include="'templates/layout/template-load.html'"
-      ></div>
-      <div ng-cloak>
-        <div ng-include="'templates/layout/support-directives.html'"></div>
-        <div class="wrapper">
-          <div class="grid grid-padded drawer-grid" template-animation-manager template-manager>
-            <div class="grid grid-full grid-main" ng-include="'templates/layout/grid-panel-columns.html'"></div>
-            <drawer
-              sortable-options-drawer="animationVM.sortableOptionsDrawer"
-            ></drawer>
-          </div>
-        </div><!-- wrapper -->
-      </div><!-- ng-cloak -->
-    </div>
+  <body>
+    <div ng-include="'templates/layout/header.html'"></div>
+    <div class="wrapper">
+      Record Page
+    </div><!-- wrapper -->
     <!-- build:js -->
     <script src="assets/js/main.js"></script>
     <!-- endbuild -->

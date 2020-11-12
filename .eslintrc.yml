@@ -1,0 +1,18 @@
+env:
+  browser: true
+parserOptions:
+  ecmaVersion: 5
+rules:
+  no-unused-vars: 0
+  no-prototype-builtins: 0
+
+globals:
+  "angular": "readonly"
+  "_": "readonly"
+  "$": "readonly"
+  "d3": "readonly"
+  "moment": "readonly"
+  "jQuery": "readonly"
+  "c3": "readonly"
+extends:
+  - "eslint:recommended"

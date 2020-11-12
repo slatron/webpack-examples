@@ -28,6 +28,8 @@ function scripts(cb) {
         paths.DEV_JS_ENTRY,
         paths.DEV_JS_LOCAL,
         paths.DEV_LANGUAGES,
+        paths.DEV_EXCLUDE_MIGRATION_PAGES,
+        paths.DEV_EXCLUDE_MIGRATION_COMPONENTS,
         paths.DEV_EXCLUDE_UNIT_TESTS
       ],
       {base: 'dev/js'}

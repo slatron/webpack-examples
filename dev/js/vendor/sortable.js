@@ -151,17 +151,6 @@ angular.module('ui.sortable', [])
                 var droptarget = ui.item.parent();
                 ui.item.sortable.droptarget = droptarget;
 
-                /**
-                *   MS - I commented the next line out for the anavo project to
-                *        allow debug mode to be turned off when we go to
-                *        production. If Drag-drop panel functionality starts
-                *        acting buggy, restore the following line and make sure
-                *        debug mode is left on in dev/js/app.js.
-                *
-                *        see https://github.com/angular-ui/ui-sortable/issues/291
-                *        for more information on this fix.
-                **/
-
                 // ui.item.sortable.droptargetModel = droptarget.scope().$eval(droptarget.attr('ng-model'));
 
                 // Cancel the sort (let ng-repeat do the sort for us)
