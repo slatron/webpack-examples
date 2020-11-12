@@ -1,56 +1,64 @@
-# React MPA sample application
+# React Alongside Gulp MPA
 
-Running this app generates a simple 2 page MPA with a shared <Menu> React component.
+Running this app generates the simple 2 page MPA with a shared <Menu> React component from [react-mpa-with-assets](https://github.com/slatron/webpack-examples/tree/react-mpa-with-assets) alongside an existing AngularJS application.
 
-- Demonstrates multiple html pages in a webpack React application
-  - Feature and directory/file structre here intended to be used alongside exisiting build
-  - Allow re-use of existing shared asset files: .scss, images, fonts
-  - Uses common HTML <head> string for base pages
+Both applications will live inside the same desitination `/app/` directory. Image, font and scss asset files will be shared by both applications. The entire build can be triggered from a single `$ gulp` command. I added a `webpack` task to the gulp process that runs in serial after the existing gulp process is complete.
 
-- Not yet included
-  - Gulp AngularJS application running in same build
-  - Translation files
-  - Unit tests
+Demonstrates the following:
+- Gulp + AngularJS
+- Webpack + React
+- Single command to build application
+- Existing commands (translations, units) continue to function
+- Directory structure for organizaing files for the migration
 
 # Prerequisites
 - node v10 (tested on v10.22.1)
 
 # Setup from cloned directory
 - `$ npm install`
-- `$ npm run start`
-- Open `http://localhost:8080/` in a browser
+- `$ npx gulp`
+- Application is built in /app/ directory
+  - use a local server to view in browser (`$ npx serve app`)
 
-# Proposed Directory Structure
+# Proposed Combined Directory Structure
 This directory structure builds off the existing structure. We need to share certain assets with the old and new applications (.scss, fonts, images).
 
 - Directories & files with a * after the name are new for the migration
-- Other directories listed already exist and contain shared resources from existing app
-- Existing directories not used in this build not in pictured structure
-  - (ex.. /dev/js/, /dev/templates/)
+- Some unrelated files are omitted
 
 ```
-├── config*/
-├── dev
+├── app/
+├── dev/
+|   ├── components*/
+|   |	  └── ComponentName/
+|   |   |   ├── ComponentName.scss
+|   |   |   └── ComponentName.js
+|   |	  └── page_roots/
+|   |       ├── ContactPage/
+|   |       |   └── ContactPage.js
+|   |       └── NewPage/
+|   |           └── NewPage.js
 |   ├── fonts/            
 |   ├── images/
+|   ├── js/
+|   ├── pages*/
+|   |   ├── contact.js
+|   |   ├── contact.html
+|   |   ├── index.js
+|   |   └── index.html
 |   ├── scss/
-|       ├── main.scss
-|       └── main-react.scss*
-|   ├── components*/
-|   	   └── ComponentName/
-|           ├── ComponentName.scss
-|           └── ComponentName.js
-|   	   └── page_roots/
-|           ├── ContactPage/
-|               └── ContactPage.js
-|           └── IndexPage/
-|               └── IndexPage.js
-|   └── pages*/
-|       ├── contact.js
-|       ├── contact.html
-|       ├── index.js
-|       └── index.html
+|   |   ├── main.scss
+|   |   └── main-react.scss*
+|   ├── scss/
+|   ├── index.html
+|   └── oldPage.html
+|
+├── gulpfile.js/
+├── po/
+├── tests/
+├── webpack_config*/
 ├── package.json
+├── units.conf.js
 └── webpack.config.js*
 ```
 
@@ -58,7 +66,15 @@ This directory structure builds off the existing structure. We need to share cer
 
 The migration pages will be built with webpack alongside the gulp build. This is to allow us to keep the existing AngualrJS application as is while the new webpack build gradually takes over. It ensures the current application code will not be changed during the migration.
 
-Most of this effort covered shared asset resources. To keep the new pages looking and functioning the same, we need to share base scss, font and image files. This directory structure incorporates the existing application to demonstrate.
+To keep the new pages looking and functioning the same, we need to share base scss, font and image files. This directory structure incorporates the existing application to demonstrate.
+
+One  change is that we will be bundling react along with the application from dependencies. This simly replaces the manual way I've been adding the Angular javascript to the main.js file with gulp.
+
+## Gulp
+
+To keep the full build process she same across all enviromnents, I added a webpack task to the gulp process. This task runs the full webpack build after gulp is finished. It packages the React files alongside the existing files in the `/app/` directory.
+
+I added a couple of file exceptions to the gulp process. There are exception entries in the `/gulpfile.js/config.js` paths object to let the gulp tasks skip these files.
 
 ## Pages
 
@@ -66,24 +82,40 @@ This is where each new page in the migration will go. In this setup, I have each
 
 Like our current application, these are entry points for the application on each page. They will each load a Component in the `/dev/components/page_roots/` directory. This will  call the authentication module and load initail data while starting the UI component tree.
 
+#### How to migrate a page
+
+The process will involve creating a new html and js file under `/dev/pages/`. This will evemtually be named the same as the existing HTML page in the current application. It will fully replace the existing page this way.
+
+Create a corresponding `/components/page_roots/` component to handle data initilization and an entry point for the UI tree. Depending on how we share application logic, there will be additional migration-specific directories for modules like authorizatoin and timezone.
+
+As each page is built out, more react components and modules will be added to the `/components/` directory, making it easier to reuse logic and UI between application pages.
+
 ## Javascript
 
 I added Babel to the project, whilch will allow us to write ES6 javascript but compile down to ES5 for older browsers like IE11.
 
-One js file per page will prevent the single `main.[tag].js` file from being cached in the browser. Doing this allows each js file to be much smaller as it will only contain the javascript needed on that page, but the tradeoff is that the user's browser will have to fetch and cache a bundle for each page. This may be percieved as an initial slower pageload the first time a user visits a page after a new release or their browser cache is cleared. We will need to revisit this. I left comments in the webpack config file on how to change this to a large single .js file if the js-per-page setup is too slow for some users.
+One js file per page will prevent the single `main.[tag].js` file from being cached in the browser. Doing this allows each js file to be much smaller as it will only contain the javascript needed on that page, but the tradeoff is that the user's browser will have to fetch and cache a bundle for each page.
+
+This may be percieved as an initial slower pageload the first time a user visits a page after a new release or their browser cache is cleared. We will need to revisit this. I left comments in the webpack config file on how to change this to a large single .js file if the js-per-page setup is too slow for some users. There are certainly optimizations that we can make as we get further on in the migration.
+
+#### Pesky js folder
+
+One large drawback in keeping the existing structure is that I named the main folder that contains the AngualrJS code "js". I'm ok living with this during the migration. Especailly since we should be able to slowly delete everything there as we go.
+
+The point to remember is that if it's in the `/dev/js`/ folder, it's only for the AngularJS application. The only other AngularJS-specific files are the .html entry-points at the `/dev/` root and the specific `/dev/scss/main.scss` file. All other files in /`dev`/ are either shared resources or specic to the migration.
 
 ### Components
 
-React omponents go in the `/dev/components/` directory and can be imported by any other component in the application. Each component should be in its own folder alongside specialized CSS and tests for that component.
+React components go in the `/dev/components/` directory and can be imported by any other component in the application. Each component should be in its own folder alongside specialized CSS and tests for that component.
 
-By React standards, each Component is a js file that shares the name of the component function exported. I'm carrying that convention to naming the subdirectories here as well. Any component subdirectory that contains a single component and its related files should be PascalCase. Other directories that contain multiple components will be in /snake_case/, like the current directory pattern.
+By React convention, each Component is a js file that shares the name of the component function exported. I'm carrying that convention to naming the subdirectories here as well. Any component subdirectory that contains a single component and its related files should be PascalCase. Other directories that contain multiple components will be in /snake_case/, like the current directory pattern.
 
 ## Styles
 
-Stypes are all written in scss. To reuse existing site styles while allowing for new style per component, I added a `main-react.scss`. This will live next to the `main.scss` file in `/dev/scss/`. Here, we can only call the base settings snd sitewide styles for state, layout and typography. We also set a path for webpack to resolve `url()` calls for background images.
+Styles are all written in scss. To reuse existing site styles while allowing for new style per component, I added a `main-react.scss`. This lives next to the `main.scss` file in `/dev/scss/`. Here, we can only call the base settings snd sitewide styles for state, layout and typography. We also set a path for webpack to resolve `url()` calls for background images, which are differnet in the react build.
 
-CSS for individual components will be imported by that module or at the componet page level.
+CSS for individual components will be imported by that module or at the componet page level. This will let us keep the global, font, typography and layout styles while assessing more specific styles written per page. I suspect that much of these specific module styles are unneeded and can be removed as the migration progresses.
 
 ### Next Steps
 
-The last anticipated POC will show how this application can live side-by-side with the current application and be triggered after the current application is built in the same repo.
+This is a demonstration on how I intend to manage the migration while keeping the current application untouched and separate. If this looks like a decent plan to the team, I'll start building this out on a branch of the existing application.
