@@ -21,6 +21,9 @@ Demonstrates the following:
 - Application is built in /app/ directory
   - use a local server to view in browser (`$ npx serve app`)
 
+# Running tests
+- `$ npm run test`
+
 # Proposed Combined Directory Structure
 This directory structure builds off the existing structure. We need to share certain assets with the old and new applications (.scss, fonts, images).
 
