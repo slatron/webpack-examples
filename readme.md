@@ -141,4 +141,3 @@ The component tests in Jest are run by comparing the current result of a compnen
 ### Next Steps
 
 This is a demonstration on how I intend to manage the migration while keeping the current application untouched and separate. If this looks like a decent plan to the team, I'll start building this out on a branch of the existing application.
-
