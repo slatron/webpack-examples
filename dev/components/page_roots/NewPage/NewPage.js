@@ -5,7 +5,7 @@ const IndexPage = (props) => {
   return (
     // <> is shorthand for a container to keep multiple root JSX nodes
     <>
-      <Menu />
+    <Menu current="home" />
       <h2>Home</h2>
       <div className="loading">
         testing css background loading gif...

@@ -1,0 +1,26 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`Menu Display Test >  Renders Active Class Passed as current 1`] = `
+<ul
+  className="site-nav"
+>
+  <li
+    className=""
+  >
+    <a
+      href="/newpage.html"
+    >
+      Home
+    </a>
+  </li>
+  <li
+    className="active"
+  >
+    <a
+      href="/contact.html"
+    >
+      Contact
+    </a>
+  </li>
+</ul>
+`;
