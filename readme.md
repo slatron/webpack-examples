@@ -102,7 +102,17 @@ This may be percieved as an initial slower pageload the first time a user visits
 
 One large drawback in keeping the existing structure is that I named the main folder that contains the AngualrJS code "js". I'm ok living with this during the migration. Especailly since we should be able to slowly delete everything there as we go.
 
-The point to remember is that if it's in the `/dev/js`/ folder, it's only for the AngularJS application. The only other AngularJS-specific files are the .html entry-points at the `/dev/` root and the specific `/dev/scss/main.scss` file. All other files in /`dev`/ are either shared resources or specic to the migration.
+Everything in the `/dev/js`/ folder is for the AngularJS application. The only other AngularJS-specific files are the .html entry-points at the `/dev/` root and the specific `/dev/scss/main.scss` file. All other files in /`dev`/ are either shared resources or specic to the migration.
+
+#### Migration file locations
+
+The migration application files will be contained in specific directories. Currently, these are `/dev/pages/` and `/dev/components/`. The components directory contains all React components. The pages directory contains all the entry .html and .js files for the migration pages. There is also a migration-specific entry file, `/dev/scss/main-react.scss`.
+
+The specific directoruy paths for migration files have entries in the gulp config.js file to easily exclude them from existing tasks.
+
+I chose to split these up into multiple folders to better set us up for when the migration is complete. I could have put all of this in a single `/migration-files/` directoty to better separate concerns. I also could have used prefixes to namespace these to the migration. like `/dev/migration-components/` and `/dev/migration-pages/`.
+
+I chose to go with the plain directory names with the intention that this will slowly take over the existing directories. At that point, I would rather have everything named appropriately then to deal with moving the tasks again after the migration.
 
 ### Components
 
@@ -116,6 +126,13 @@ Styles are all written in scss. To reuse existing site styles while allowing for
 
 CSS for individual components will be imported by that module or at the componet page level. This will let us keep the global, font, typography and layout styles while assessing more specific styles written per page. I suspect that much of these specific module styles are unneeded and can be removed as the migration progresses.
 
+### Units
+
+I have not addressed unit tests for the new components. This currently works with the existing AngularJS unit tests. The intention is to keep each spec file in the component's folder alongside any speific .js and .scss.
+
+Since there are still items to set up before this can go in an actual repository branch, I'll add unit test examples between tasks.
+
 ### Next Steps
 
 This is a demonstration on how I intend to manage the migration while keeping the current application untouched and separate. If this looks like a decent plan to the team, I'll start building this out on a branch of the existing application.
+
