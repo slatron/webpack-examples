@@ -7,6 +7,7 @@ Both applications will live inside the same desitination `/app/` directory. Imag
 Demonstrates the following:
 - Gulp + AngularJS
 - Webpack + React
+- Jest unit test setup
 - Single command to build application
 - Existing commands (translations, units) continue to function
 - Directory structure for organizaing files for the migration
@@ -32,6 +33,7 @@ This directory structure builds off the existing structure. We need to share cer
 |   ├── components*/
 |   |	  └── ComponentName/
 |   |   |   ├── ComponentName.scss
+|   |   |   ├── ComponentNameSpec.jest.js
 |   |   |   └── ComponentName.js
 |   |	  └── page_roots/
 |   |       ├── ContactPage/
@@ -57,6 +59,8 @@ This directory structure builds off the existing structure. We need to share cer
 ├── po/
 ├── tests/
 ├── webpack_config*/
+├── .babelrc*
+├── jest.config.json*
 ├── package.json
 ├── units.conf.js
 └── webpack.config.js*
@@ -126,11 +130,13 @@ Styles are all written in scss. To reuse existing site styles while allowing for
 
 CSS for individual components will be imported by that module or at the componet page level. This will let us keep the global, font, typography and layout styles while assessing more specific styles written per page. I suspect that much of these specific module styles are unneeded and can be removed as the migration progresses.
 
-### Units
+### Unit Tests
 
-I have not addressed unit tests for the new components. This currently works with the existing AngularJS unit tests. The intention is to keep each spec file in the component's folder alongside any speific .js and .scss.
+Jest is the test runner used for the new React components. These can be launched with `$ npm run test`.
 
-Since there are still items to set up before this can go in an actual repository branch, I'll add unit test examples between tasks.
+The test files will live in component directories alongside the .js and .scss files. They will use the same name as other component files with Spec.jest.js at the end of the filename. So the tests for a Menu component would be in `/dev/components/Menu/MenuSpec.jest.js`. This is the same as with current files, just with the extra .jest in the extension to differentiate the tests.
+
+The component tests in Jest are run by comparing the current result of a compnent to a previous snapshot taken of the component's output with the same parameters. These will be stored in the component directory alongside the jest, js and .scss files. They will be committed to the dev repository, but not generated in the /app files. When a component's functionality changes, a new snapshot whould be generated while running the local tests. Otherwise, these should stay the same.
 
 ### Next Steps
 
