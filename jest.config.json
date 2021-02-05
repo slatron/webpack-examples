@@ -2,6 +2,14 @@
   "testRegex": "((\\.|/*.)(Spec.jest))\\.js?$",
   "moduleNameMapper": {
     "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)$": "<rootDir>/tests/units/support/fileMock.js",
-    "\\.(css|scss)$": "<rootDir>/tests/units/support/styleMock.js"
+    "\\.(css|scss)$": "<rootDir>/tests/units/support/styleMock.js",
+    "^tests/units/jest(.*)$": "<rootDir>/tests/units/jest$1",
+    "^dev(.*)$": "<rootDir>/dev$1",
+    "^api(.*)$": "<rootDir>/dev/api$1",
+    "^components(.*)$": "<rootDir>/dev/components$1",
+    "^pages(.*)$": "<rootDir>/dev/pages$1",
+    "^settings(.*)$": "<rootDir>/dev/settings$1",
+    "^store(.*)$": "<rootDir>/dev/store$1",
+    "^utils(.*)$": "<rootDir>/dev/utils$1"
   }
 }
