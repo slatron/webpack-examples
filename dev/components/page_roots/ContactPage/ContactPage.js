@@ -1,7 +1,7 @@
-import React, { useState } from 'react'
+import React from 'react'
 import Menu from 'components/Menu/Menu'
 
-const ContactPage = (props) => {
+const ContactPage = () => {
   return (
     // <> is shorthand for a container to keep multiple root JSX nodes
     <>

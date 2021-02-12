@@ -115,7 +115,9 @@ module.exports = (env, argv) => {
         {
           test: /\.js$/,
           exclude: /node_modules/,
-          use: ['babel-loader']
+          use: {
+            loader: 'babel-loader'
+          }
         }
       ]
     },
@@ -135,6 +137,8 @@ module.exports = (env, argv) => {
           }
         }
       }
-    }
+    },
+
+    target: ['web', 'es5']
   } // End webpack.config object returned
 }
