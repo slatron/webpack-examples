@@ -76,6 +76,8 @@
   "dependencies": {
     "axios": "^0.21.0",
     "core-js": "^3.8.3",
+    "date-time-format-timezone": "^1.0.22",
+    "dayjs": "^1.10.4",
     "eslint-plugin-react": "^7.21.5",
     "i18next": "^19.8.7",
     "i18next-conv": "^10.1.0",

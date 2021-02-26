@@ -7,6 +7,7 @@ const IndexPage = (props) => {
     <>
     <Menu current="home" />
       <h2>Home</h2>
+      <p>THIS PAGE HAS NO IE11 Polyfills for COMPARISON - see /dev/pages/contact.js</p>
       <div className="loading">
         testing css background loading gif...
       </div>
