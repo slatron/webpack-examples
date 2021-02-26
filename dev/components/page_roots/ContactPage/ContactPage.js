@@ -24,6 +24,7 @@ const ContactPage = () => {
       <h2>Contact</h2>
       <p>JA | {testFunctions()}</p>
       <p>EN | {testEn()}</p>
+      <h5>INtl - relativetimeformat and pluralrules polyfills added</h5>
       <p>nowEN | {nowEN()}</p>
       <p>now | {now()}</p>
 
