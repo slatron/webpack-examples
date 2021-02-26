@@ -3,11 +3,9 @@ import Menu from 'components/Menu/Menu'
 
 import { useTranslation } from 'react-i18next';
 
-import {now, nowEN, formatDateTime, formatDate, getDateFromISOString} from './formatDatestring'
+import {now, nowEN, formatDateTime, formatDate} from './formatDatestring'
 
 const testFunctions = () => {
-  console.log('getDateFromISOString ja: ', getDateFromISOString('2021-02-21'))
-  console.log('getDateFromISOString ja: ', getDateFromISOString('2021-02-21T12:30:32'))
   return `${formatDateTime.ja('2021-02-21T12:30:32')} | ${formatDate.ja('2021-02-21')}`
 }
 
@@ -16,15 +14,16 @@ const testEn = () => {
 }
 
 const ContactPage = () => {
-  const { t, i18n } = useTranslation()
+  const { t } = useTranslation()
 
   return (
     <>
       <Menu current="contact" />
       <h2>Contact</h2>
+      <h3>This page is using Day.js with Polyfills to format dates and get date in timezone returned during session login</h3>
       <p>JA | {testFunctions()}</p>
       <p>EN | {testEn()}</p>
-      <h5>INtl - relativetimeformat and pluralrules polyfills added</h5>
+      <h5>Current Day:</h5>
       <p>nowEN | {nowEN()}</p>
       <p>now | {now()}</p>
 

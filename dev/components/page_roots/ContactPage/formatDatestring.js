@@ -4,19 +4,15 @@ import '@formatjs/intl-getcanonicallocales/polyfill'
 
 import '@formatjs/intl-numberformat/polyfill'
 import '@formatjs/intl-numberformat/locale-data/en'
-import '@formatjs/intl-numberformat/locale-data/ja'
 
 import '@formatjs/intl-pluralrules/polyfill'
 import '@formatjs/intl-pluralrules/locale-data/en'
-import '@formatjs/intl-pluralrules/locale-data/ja'
 
 import '@formatjs/intl-relativetimeformat/polyfill'
 import '@formatjs/intl-relativetimeformat/locale-data/en'
-import '@formatjs/intl-relativetimeformat/locale-data/ja'
 
 import '@formatjs/intl-datetimeformat/polyfill'
 import '@formatjs/intl-datetimeformat/locale-data/en'
-import '@formatjs/intl-datetimeformat/locale-data/ja'
 
 import '@formatjs/intl-datetimeformat/add-all-tz'
 
@@ -28,11 +24,15 @@ dayjs.extend(timezone)
 
 // now returns Date object in users timezone returned in session response
 export const now = () => {
-  return new dayjs().tz("Asia/Tokyo").format('YYYY年M月D日 h:mma')
+  console.log('  * Using tz("Asia/Tokyo")', new dayjs().tz("Asia/Tokyo"))
+  console.log('  * Using tz("America/Chicago")', new dayjs().tz("America/Chicago"))
+  console.log('  * No tz()) ', new dayjs())
+
+  return new dayjs().tz("Asia/Tokyo").format('YYYY年M月D日')
 }
 
 export const nowEN = () => {
-  return new dayjs().tz("America/Chicago").format('MMM D, YYYY h:mma')
+  return new dayjs().tz("America/Chicago").format('MMM D, YYYY')
 }
 
 // Format methods per language code returned in session response
