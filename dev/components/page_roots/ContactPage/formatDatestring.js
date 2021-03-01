@@ -16,10 +16,9 @@ import '@formatjs/intl-datetimeformat/locale-data/en'
 
 import '@formatjs/intl-datetimeformat/add-all-tz'
 
-import 'dayjs/locale/en'
-import 'dayjs/locale/ja'
 
 import dayjs from 'dayjs'
+import 'dayjs/locale/ja'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 dayjs.extend(utc)
@@ -44,7 +43,7 @@ export const formatDateTime = {
     return new dayjs(d).locale('ja').format('YYYY年M月D日 h:mma')
   },
   en (d) {
-    return new dayjs(d).locale('en').format('MMM D, YYYY h:mma')
+    return new dayjs(d).format('MMM D, YYYY h:mma')
   }
 }
 
@@ -53,7 +52,7 @@ export const formatDate = {
     return new dayjs(d).locale('ja').format('YYYY年M月D日')
   },
   en (d) {
-    return new dayjs(d).locale('en').format('MMM D, YYYY')
+    return new dayjs(d).format('MMM D, YYYY')
   }
 }
 
