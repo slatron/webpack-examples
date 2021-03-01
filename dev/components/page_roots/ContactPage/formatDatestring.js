@@ -16,6 +16,7 @@ import '@formatjs/intl-datetimeformat/locale-data/en'
 
 import '@formatjs/intl-datetimeformat/add-all-tz'
 
+import 'dayjs/locale/ja'
 
 import dayjs from 'dayjs'
 import utc from 'dayjs/plugin/utc'
