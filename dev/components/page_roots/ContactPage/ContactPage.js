@@ -19,7 +19,7 @@ const ContactPage = () => {
   return (
     <>
       <Menu current="contact" />
-      <h2>Contact</h2>
+      <h2>DATE FORMATTING DEMO</h2>
       <h3>This page is using Day.js with Polyfills to format dates and get date in timezone returned during session login</h3>
       <p>JA | {testFunctions()}</p>
       <p>EN | {testEn()}</p>
