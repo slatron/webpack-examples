@@ -1,13 +1,23 @@
 import '@formatjs/intl-locale/polyfill'
+
 import '@formatjs/intl-getcanonicallocales/polyfill'
+
 import '@formatjs/intl-numberformat/polyfill'
+import '@formatjs/intl-numberformat/locale-data/en'
+
 import '@formatjs/intl-pluralrules/polyfill'
+import '@formatjs/intl-pluralrules/locale-data/en'
+
 import '@formatjs/intl-relativetimeformat/polyfill'
+import '@formatjs/intl-relativetimeformat/locale-data/en'
+
 import '@formatjs/intl-datetimeformat/polyfill'
+import '@formatjs/intl-datetimeformat/locale-data/en'
+
 import '@formatjs/intl-datetimeformat/add-all-tz'
 
+
 import dayjs from 'dayjs'
-import 'dayjs/locale/ja'
 import utc from 'dayjs/plugin/utc'
 import timezone from 'dayjs/plugin/timezone'
 dayjs.extend(utc)
