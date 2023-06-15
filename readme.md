@@ -1,5 +1,10 @@
 # webpack examples
+
 POC models for webpack apps
+
+I used this repo to test various builds of an app I had to migrate from AngularJs/Gulp to React/Webpack.
+
+You can see my various attempts in the branches here.
 
 ### Framework Agnostic MPA models
 
